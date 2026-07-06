@@ -1,0 +1,46 @@
+{
+  "suite": "开发相关 Skill 套件",
+  "target_path": "/Users/cyan/个人工作/AI-skillS汇总/开发相关",
+  "skills": [
+    {
+      "name": "ai-dev-tech-stack-orchestrator",
+      "category": "技术选型与规范编排"
+    },
+    {
+      "name": "react-typescript-web-standard",
+      "category": "技术栈开发规范"
+    },
+    {
+      "name": "vue-typescript-web-standard",
+      "category": "技术栈开发规范"
+    },
+    {
+      "name": "nextjs-fullstack-standard",
+      "category": "技术栈开发规范"
+    },
+    {
+      "name": "electron-desktop-standard",
+      "category": "技术栈开发规范"
+    },
+    {
+      "name": "flutter-mobile-standard",
+      "category": "技术栈开发规范"
+    },
+    {
+      "name": "fastapi-backend-standard",
+      "category": "技术栈开发规范"
+    },
+    {
+      "name": "springboot-backend-standard",
+      "category": "技术栈开发规范"
+    },
+    {
+      "name": "change-impact-analysis",
+      "category": "需求变更影响分析"
+    },
+    {
+      "name": "data-consistency-regression-test",
+      "category": "数据一致性与回归测试"
+    }
+  ]
+}
