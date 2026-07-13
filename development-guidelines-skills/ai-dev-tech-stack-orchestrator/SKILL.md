@@ -1,254 +1,113 @@
 ---
 name: ai-dev-tech-stack-orchestrator
-description: 根据用户项目目标、应用类型、运行端、复杂度、开发周期和维护要求，推荐合适的开发语言、技术框架、应用架构，并编排应启用的开发规范 Skill。适用于新项目启动、技术选型、项目初始化前的 AI Coding 规划。
+description: "为尚未确定技术栈的新项目比较有配套规范的技术方案，选择应用架构，并编排可用的开发规范 Skill。仅在用户明确要求技术选型、架构比较、greenfield 初始化规划，或在应用技术栈/整体架构迁移前要求重新评估时使用；不要用于数据库/schema/数据迁移、技术栈已确定的日常实现、局部修改、bug 修复、代码审查或修改后的验证。"
 ---
 
-# AI 开发技术选型与规范编排 Skill
+# AI 开发技术选型与规范编排
 
-## 目标
+## 目标与边界
 
-在项目开发之初，先判断项目适合采用哪种开发语言、技术框架和应用架构，并输出应启用的开发规范组合，避免项目一开始就出现目录混乱、数据源分散、组件重复开发、接口无统一封装、后续修改无法联动的问题。
+只做技术决策和初始化前规划，不直接创建业务代码、安装依赖或改写仓库。输出可追溯的 `StackDecision`，明确假设、证据、标准覆盖和未决风险。
 
-本 Skill 不是直接写业务代码，而是负责：
+开始前读取：
 
-1. 判断项目类型。
-2. 推荐技术栈。
-3. 推荐应用架构。
-4. 选择需要启用的开发规范 Skill。
-5. 生成项目初始化前的约束说明。
+- [StackDecision 契约](references/stack-decision.md)：字段、加权矩阵、架构规则和支持目录。
+- [StackDecision 模板](assets/stack-decision-template.md)：仅在需要持久化或完整报告时使用。
 
-## 触发场景
+## 选择模式
 
-当用户提出以下需求时触发：
+先选择且只选择一种模式：
 
-- 我要开发一个 Web 应用。
-- 我要做一个移动端 App。
-- 我要做一个桌面 PC 软件。
-- 我要做一个后台管理系统。
-- 我要做一个企业级系统。
-- 我要做一个 AI 工具 / AI Agent / AI Coding 项目。
-- 帮我判断这个项目适合用什么技术栈。
-- 这个项目用 React、Vue、Flutter、Electron、Python、Java 哪个更合适？
-- 项目开始前，帮我生成开发规范。
+- `decision-only`：比较方案并给出决策；不修改文件。
+- `greenfield`：为尚未实现的项目确定初始化方案；用户未明确要求实施时仍只输出决策。
 
-## 输入信息收集
+如果现有仓库的技术栈已经确定，停止 greenfield 编排。用户只要求实现、修复、数据库/schema/数据迁移或验证时，不使用本 Skill；用户明确要求迁移应用技术栈、改变整体架构或重新评估时改用 `decision-only`，把现有投资和迁移风险纳入矩阵。
 
-如果用户已经提供足够信息，直接判断；如果信息不足，优先基于已有内容做合理假设，不要过度追问。
+## 执行流程
 
-需要识别的信息包括：
+### 1. 确认目标和硬约束
 
-```text
-1. 项目目标：要解决什么问题？
-2. 应用类型：Web / App / 桌面端 / 后端服务 / AI Agent / 小程序。
-3. 目标用户：个人、企业内部、客户、运维人员、普通用户。
-4. 复杂度：Demo / MVP / 中大型系统 / 长期维护项目。
-5. 运行端：浏览器、iOS、Android、Windows、macOS、Linux、服务端。
-6. 数据特征：是否有大量表格、图表、文件、本地存储、实时通信、AI 调用。
-7. 团队能力：是否偏前端、后端、全栈、Python、Java、JS/TS。
-8. 开发周期：短期验证还是长期产品化。
-9. 部署方式：云端部署、本地部署、内网部署、单机运行。
-10. 是否需要跨端：Web + App、Web + 桌面端、移动端双平台。
-```
+提取项目目标、目标用户、运行端、部署方式、交付期限、维护周期、团队能力、预算、离线要求、性能目标、安全合规、数据驻留、许可证和现有系统集成。
 
-## 技术选型判断规则
+只对不可逆或会改变候选集合的信息追问。对可逆信息作最小假设，并在输出中明确标记；不得把假设写成事实。
 
-### Web 管理后台 / 企业系统
+### 2. 检查现有环境
 
-优先推荐：
+用户提供目录或目标位置时，先执行只读检查：
 
-```text
-React + TypeScript + Vite + Ant Design / shadcn/ui
-Vue + TypeScript + Vite + Element Plus / Arco Design
-Next.js + TypeScript
-```
+1. 定位仓库根和适用的 `AGENTS.md`、项目规范、ADR。
+2. 检查版本控制状态和 dirty worktree；保留所有已有修改。
+3. 从 manifest、锁文件、CI 和配置中识别语言、框架、运行时、包管理器及版本。
+4. 读取已有测试或 CI 失败；只有安全且成本合理时才运行最小基线检查。
+5. 记录命令、结果和证据；未尝试使用 `Not run`，已尝试但缺环境或权限使用 `Blocked`，只有证据确认不适用时使用 `N/A`。`unknown` 只能描述尚未确认的事实值，不能作为检查状态。
 
-适用场景：
+没有现有仓库的 greenfield 项目将上述仓库字段标记为 `N/A`，不得虚构版本或失败状态。
 
-- OA 系统
-- 管理后台
-- 数据看板
-- 业务流程系统
-- 表格、筛选、详情、权限较多的系统
+### 3. 建立候选
 
-推荐启用：
+从契约中的“支持目录”建立默认候选，并确认对应技术栈 Skill 实际可用。默认不推荐没有配套标准的栈。
 
-```text
-react-typescript-web-standard 或 vue-typescript-web-standard
-change-impact-analysis
-data-consistency-regression-test
-```
+如果用户硬约束只能由未覆盖栈满足：
 
-### 官网 / 内容站 / SEO 页面
+1. 将该候选的标准支持标为 `unsupported`。
+2. 说明缺失的是技术规范覆盖，不等同于技术本身不可用。
+3. 提议新增对应标准 Skill 或沿用仓库已有规范。
+4. 不得借用相似 Skill 冒充完整覆盖。
 
-优先推荐：
+### 4. 加权决策
 
-```text
-Next.js + TypeScript
-Astro
-Nuxt
-```
+先淘汰违反运行端、合规、预算或关键集成等硬约束的候选，再使用契约中的加权矩阵评分。根据用户目标调整权重，说明调整原因，并为每个分数关联证据。
 
-适用场景：
+至少比较两个可行候选；只有一个候选满足硬约束时，说明淘汰过程，不制造虚假竞争。
 
-- 官网
-- 文档站
-- 产品介绍页
-- 内容营销页面
-- 需要 SEO 的站点
+### 5. 选择架构
 
-推荐启用：
+根据业务边界和非功能要求确定：
 
-```text
-nextjs-fullstack-standard
-change-impact-analysis
-data-consistency-regression-test
-```
+- 部署边界和模块边界。
+- canonical 数据所有权及 derived/cache 边界。
+- API、事件和同步/异步通信方式。
+- 身份、权限、租户和审计边界。
+- 可靠性、扩缩容、可观测性和故障恢复。
+- 多端共享契约、离线同步与冲突策略。
 
-### 移动端 App
+优先选择满足证据的最简单架构。不要因为“企业级”默认选择微服务，也不要因为“AI 项目”忽略数据隐私、调用成本、评测、限流和可观测性。
 
-优先推荐：
+### 6. 编排 companion Skills
 
-```text
-Flutter
-React Native
-原生 Android Kotlin
-原生 iOS Swift
-```
+使用显式名称列出已核实可用的 companion Skills：
 
-选择规则：
+- 一个技术栈标准，例如 `$react-typescript-web-standard`。
+- 改动前使用 `$change-impact-analysis`。
+- 改动后使用 `$data-consistency-regression-test`。
 
-```text
-1. 需要快速跨 iOS/Android：Flutter 或 React Native。
-2. 强依赖系统能力、性能和平台体验：原生 Kotlin / Swift。
-3. 团队偏前端：React Native。
-4. 追求较稳定跨端 UI：Flutter。
-```
+Skill 不可用时：
 
-推荐启用：
+- 技术栈标准缺失：将标准支持标为 `unsupported`。
+- 两个核心 companion 之一缺失：使用本契约的最小影响/验证要求继续，标记 `degraded`，不要声称已调用该 Skill。
 
-```text
-flutter-mobile-standard
-change-impact-analysis
-data-consistency-regression-test
-```
+Skill 之间出现冲突时，按用户明确指令、仓库适用规则、现有架构事实、技术栈标准、通用核心流程的顺序处理，并披露冲突。
 
-### 桌面 PC 软件
+### 7. 输出决策
 
-优先推荐：
+至少输出：
 
-```text
-Electron + React/Vue + TypeScript
-Tauri + Rust + Web 前端
-Qt + C++/Python
-C# WPF / WinUI
-```
+1. 模式、项目判断和硬约束。
+2. 环境基线、版本、dirty worktree 和已有失败。
+3. 候选矩阵、淘汰项及证据。
+4. 推荐技术栈、架构和主要权衡。
+5. 标准支持状态与 companion Skills。
+6. 风险、假设、未决问题和下一步。
 
-选择规则：
+默认在回复中给出结果。仅在用户明确要求，或仓库已有工程决策文档惯例时，才按模板写入项目相对路径 `docs/engineering/stack-decision.md`；先读取并保护已有内容。不得强制创建 `AGENTS.md` 或任何 docs 文件。
 
-```text
-1. 需要快速开发跨平台桌面端：Electron。
-2. 追求轻量安装包和安全隔离：Tauri。
-3. 强图形、底层能力、跨平台工具：Qt。
-4. Windows 企业桌面软件：C# WPF / WinUI。
-```
+## 完成检查
 
-推荐启用：
+结束前确认：
 
-```text
-electron-desktop-standard
-change-impact-analysis
-data-consistency-regression-test
-```
-
-### 后端服务 / API 服务
-
-优先推荐：
-
-```text
-Python FastAPI
-Java Spring Boot
-Node.js NestJS
-Go Gin/Fiber
-```
-
-选择规则：
-
-```text
-1. AI 应用、数据处理、原型快：FastAPI。
-2. 企业级复杂后端、权限、事务、稳定性：Spring Boot。
-3. 前端团队全栈开发：NestJS。
-4. 高性能服务、部署轻量：Go。
-```
-
-推荐启用：
-
-```text
-fastapi-backend-standard 或 springboot-backend-standard
-change-impact-analysis
-data-consistency-regression-test
-```
-
-## 输出格式
-
-每次执行时，必须输出以下内容：
-
-```text
-1. 项目类型判断
-2. 推荐技术栈
-3. 推荐应用架构
-4. 选择原因
-5. 不推荐方案及原因
-6. 应启用的开发规范 Skill
-7. 项目初始化时必须生成的规范文件
-8. 后续需求变更时必须触发的检查 Skill
-```
-
-## 标准输出模板
-
-```markdown
-# 技术选型与规范编排结果
-
-## 1. 项目类型判断
-- 应用类型：
-- 运行端：
-- 复杂度：
-- 维护周期：
-
-## 2. 推荐技术栈
-- 前端/客户端：
-- 后端：
-- 数据库：
-- 状态管理：
-- UI 组件库：
-- 构建/部署：
-
-## 3. 推荐架构
-- 架构类型：
-- 模块划分方式：
-- 数据源管理方式：
-- 接口管理方式：
-
-## 4. 推荐原因
-
-## 5. 不推荐方案
-
-## 6. 应启用的 Skill
-- 技术栈开发规范 Skill：
-- 需求变更影响分析 Skill：change-impact-analysis
-- 数据一致性与回归测试 Skill：data-consistency-regression-test
-
-## 7. 项目初始化必须生成的规范文件
-- docs/development-standard.md
-- docs/data-source-standard.md
-- docs/change-impact-standard.md
-- docs/regression-test-checklist.md
-- AGENTS.md
-```
-
-## 强制约束
-
-1. 不要只推荐技术栈，必须同时给出规范组合。
-2. 不要只关注开发速度，也要考虑后续维护、数据一致性、跨页面联动修改。
-3. 如果项目涉及多个页面共享数据，必须启用数据源统一和变更影响分析规则。
-4. 如果是 AI Coding 场景，必须生成 `AGENTS.md` 或等价的 AI 执行规则文件。
-5. 技术选型完成后，必须提醒后续开发不能直接开始写页面，应先生成项目开发规范。
+- 模式与用户意图一致。
+- 仓库事实、版本和已有失败均有证据或明确标记未知。
+- 所有推荐栈都有实际存在的配套标准，例外已标为 `unsupported`。
+- 权重合计为 100，硬约束未被总分掩盖。
+- 架构选择覆盖合规、成本、团队和运维所有权。
+- `StackDecision` 字段与契约一致，没有伪造 companion 调用或测试结果。

@@ -1,46 +1,109 @@
 {
-  "suite": "开发相关 Skill 套件",
-  "target_path": "/Users/cyan/个人工作/AI-skillS汇总/开发相关",
+  "schema_version": 2,
+  "suite": "development-guidelines",
+  "suite_version": "2.0.0",
+  "install_layout": "flattened",
+  "settings": {
+    "max_rework_cycles": 2,
+    "default_change_risk": "module",
+    "report_statuses": [
+      "Pass",
+      "Fail",
+      "Blocked",
+      "Not run",
+      "N/A"
+    ]
+  },
   "skills": [
     {
       "name": "ai-dev-tech-stack-orchestrator",
-      "category": "技术选型与规范编排"
+      "category": "technology-decision",
+      "phase": "planning",
+      "priority": 10,
+      "modes": ["decision-only", "greenfield"],
+      "standard_options": [
+        "react-typescript-web-standard",
+        "vue-typescript-web-standard",
+        "nextjs-fullstack-standard",
+        "electron-desktop-standard",
+        "flutter-mobile-standard",
+        "fastapi-backend-standard",
+        "springboot-backend-standard"
+      ],
+      "selection": "one",
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "react-typescript-web-standard",
-      "category": "技术栈开发规范"
+      "category": "stack-guidance",
+      "phase": "implementation",
+      "priority": 20,
+      "modes": ["greenfield", "existing-project", "review"],
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "vue-typescript-web-standard",
-      "category": "技术栈开发规范"
+      "category": "stack-guidance",
+      "phase": "implementation",
+      "priority": 20,
+      "modes": ["greenfield", "existing-project", "review"],
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "nextjs-fullstack-standard",
-      "category": "技术栈开发规范"
+      "category": "stack-guidance",
+      "phase": "implementation",
+      "priority": 21,
+      "modes": ["greenfield", "existing-project", "review"],
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "electron-desktop-standard",
-      "category": "技术栈开发规范"
+      "category": "stack-guidance",
+      "phase": "implementation",
+      "priority": 21,
+      "modes": ["greenfield", "existing-project", "review"],
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "flutter-mobile-standard",
-      "category": "技术栈开发规范"
+      "category": "stack-guidance",
+      "phase": "implementation",
+      "priority": 20,
+      "modes": ["greenfield", "existing-project", "review"],
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "fastapi-backend-standard",
-      "category": "技术栈开发规范"
+      "category": "stack-guidance",
+      "phase": "implementation",
+      "priority": 20,
+      "modes": ["greenfield", "existing-project", "review"],
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "springboot-backend-standard",
-      "category": "技术栈开发规范"
+      "category": "stack-guidance",
+      "phase": "implementation",
+      "priority": 20,
+      "modes": ["greenfield", "existing-project", "review"],
+      "workflow_companions": ["change-impact-analysis", "data-consistency-regression-test"]
     },
     {
       "name": "change-impact-analysis",
-      "category": "需求变更影响分析"
+      "category": "change-safety",
+      "phase": "pre-change",
+      "priority": 30,
+      "modes": ["local", "module", "contract", "data-migration", "security-critical"],
+      "workflow_companions": ["data-consistency-regression-test"]
     },
     {
       "name": "data-consistency-regression-test",
-      "category": "数据一致性与回归测试"
+      "category": "change-safety",
+      "phase": "post-change",
+      "priority": 40,
+      "modes": ["local", "module", "contract", "data-migration", "security-critical"],
+      "workflow_companions": ["change-impact-analysis"]
     }
   ]
 }

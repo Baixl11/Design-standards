@@ -1,176 +1,81 @@
 ---
 name: electron-desktop-standard
-description: Electron 桌面 PC 软件开发规范 Skill。用于约束 Electron 主进程、渲染进程、IPC 通信、本地文件、窗口管理、自动更新、安全隔离、统一数据源和 AI Coding 修改规则。
+description: 约束、实现或审查 Electron + TypeScript 桌面应用的主进程、preload、renderer、IPC、本地能力、打包和更新。用于新建 Electron 项目、修改现有 Electron 代码、处理窗口/文件/数据库/协议/自动更新，或审查 Electron 安全与发布；不用于 Tauri、Qt、原生桌面应用或纯浏览器项目。若 renderer 使用 React/Vue，同时采用对应 Web Skill，但进程隔离、IPC 和桌面安全以本 Skill 为准。
 ---
 
-# Electron 桌面软件开发规范 Skill
+# Electron Desktop Standard
 
-## 适用场景
+## 选择执行模式
 
-适用于：
+先确定且只选择一种模式：
 
-- Electron 桌面端软件
-- Windows / macOS / Linux 跨平台工具
-- 本地文件处理工具
-- 企业桌面客户端
-- Web 技术栈封装的桌面应用
+- **greenfield**：设计新项目，在完成技术决策后建立最小骨架与质量门。
+- **existing-project**：修改现有项目，优先遵循仓库既有架构、依赖和命令。
+- **review**：只报告风险、证据和整改顺序；除非用户要求，不修改代码。
 
-## 推荐技术组合
+## 先检查项目
 
-```text
-Electron + TypeScript
-渲染层：React / Vue
-构建：electron-vite / electron-builder
-状态管理：Zustand / Pinia / Redux Toolkit
-本地数据库：SQLite / IndexedDB
-自动更新：electron-updater
-日志：electron-log
-测试：Vitest + Playwright
-```
+在提出方案或编辑代码前：
 
-## 推荐目录结构
+1. 阅读仓库级 `AGENTS.md`、贡献指南和目标目录附近的说明。
+2. 检查 `package.json`、锁文件、workspace 配置、Electron major、Node 要求和 renderer 框架版本。
+3. 检查开发、类型检查、lint、测试、打包、签名和发布脚本；沿用锁文件对应的包管理器。
+4. 定位 main、preload、renderer、共享契约、窗口工厂、IPC 注册、协议、存储和 updater 的真实位置。
+5. 检查 `BrowserWindow.webPreferences`、CSP、导航策略、session 权限、构建目标和各平台签名配置。
+6. 记录当前架构与请求不一致之处；`existing-project` 模式不得因本 Skill 推荐擅自换构建器、状态库、数据库或 renderer 框架。
 
-```text
-src/
-  main/
-    index.ts
-    windows/
-    ipc/
-    services/
-    file-system/
-    updater/
-  preload/
-    index.ts
-    api.ts
-  renderer/
-    app/
-    pages/
-    features/
-    shared/
-  shared/
-    types/
-    constants/
-    schemas/
-```
+## Greenfield 决策
 
-## 主进程 / 渲染进程边界
+每一项只选择一种满足条件的主方案，并记录理由：
 
-```text
-1. 主进程负责窗口、系统能力、本地文件、自动更新、托盘、菜单。
-2. 渲染进程负责 UI 展示和用户交互。
-3. 渲染进程不得直接访问 Node.js 系统能力。
-4. 所有系统能力必须通过 preload 暴露安全 API。
-5. IPC 通信必须有统一通道命名和类型定义。
-```
+| 决策 | 默认选择条件 | 其他选择条件 |
+| --- | --- | --- |
+| 工具链 | 需要一体化脚手架、打包和插件时选择 Electron Forge | 已确定 Vite renderer 且需要 electron-builder 发布能力时选择 electron-vite + electron-builder |
+| renderer | 团队和产品已有 React 体系时选择 React | 已有 Vue 体系时选择 Vue；不要为 Electron 单独换框架 |
+| 状态 | 先使用 renderer 框架本地状态 | 只有明确的跨窗口/跨页面客户端状态才选择项目既有 store |
+| 持久化 | 关系数据、事务和迁移选择 SQLite，由 main/utility process 管理 | IndexedDB 仅用于 renderer 范围的浏览器缓存；简单设置使用受控配置存储 |
+| 契约校验 | 复用项目已有 runtime schema 库 | 没有时先证明 IPC/配置边界需要，再引入一个库 |
 
-## IPC 规范
+不要把 `electron-vite` 与 `electron-builder` 当作互斥工具，也不要同时引入多套打包发布体系。
 
-```text
-1. IPC 通道统一定义在 shared/constants/ipc.ts。
-2. IPC 请求参数和返回值统一定义在 shared/types。
-3. 主进程 handler 放 main/ipc。
-4. 渲染进程调用封装在 renderer/shared/services。
-5. 修改 IPC 参数时必须同步主进程、preload、渲染层、类型和测试。
-```
+## 架构与安全工作流
 
-## 本地文件与数据库规范
+涉及进程边界、窗口、IPC、文件、协议或远程内容时，先阅读并执行 [architecture-security.md](references/architecture-security.md)。核心要求：
 
-```text
-1. 文件读写必须通过 main/file-system 或 main/services。
-2. 禁止渲染层直接拼接本地路径。
-3. 本地数据模型必须统一定义。
-4. 数据迁移必须有版本记录。
-5. 大文件处理必须考虑异步、进度、取消、异常恢复。
-```
+1. main 拥有桌面能力，renderer 只负责 Web UI；CPU 密集或不可信任务移入 worker/`utilityProcess`。
+2. preload 通过 `contextBridge` 暴露按用例命名的窄方法；绝不暴露通用 `send`、`invoke`、Node 对象或整个 `ipcRenderer`。
+3. IPC 参数和结果使用共享类型并在运行时校验；main handler 同时验证 sender、frame/origin、权限和资源范围。
+4. 显式启用 `contextIsolation` 与 `sandbox`，关闭 `nodeIntegration`，限制导航、新窗口、权限、协议和外部 URL，并配置 CSP。
+5. 文件访问使用规范化路径、允许目录、符号链接/TOCTOU 防护和原子写入；敏感信息不得进入 renderer 可读存储或日志。
 
-## 安全规范
+## 风险模式与 Companion Skills
 
-```text
-1. contextIsolation 必须开启。
-2. nodeIntegration 默认关闭。
-3. preload 只暴露最小必要 API。
-4. 禁止渲染层执行任意系统命令。
-5. 文件路径、外部链接、协议调用必须校验。
-```
+选择且只选择最高风险模式：
 
+- `local`：单一 renderer 组件、纯 main/preload 辅助函数或同一所有权单元内的局部行为。
+- `module`：同一桌面 feature 或进程内跨文件变更，例如窗口生命周期、菜单/托盘和内部设置。
+- `contract`：IPC/preload API、协议、深链、跨窗口消息、更新 feed 或外部可消费文件格式。
+- `data-migration`：SQLite schema、持久化配置/文件语义、迁移、backfill、保留或删除。
+- `security-critical`：鉴权授权、IPC sender 权限、远程内容、文件访问范围、机密、签名和更新信任链。
 
-## 通用强制原则
+`existing-project` 实现模式以及 greenfield 开始写入代码前使用 `$change-impact-analysis` 并传递风险模式；纯 greenfield 决策和不计划修改的 review 不调用。任何模式只要实施了修改，完成后都使用 `$data-consistency-regression-test` 并继承同一模式。验证发现新的 `contract`、`data-migration` 或 `security-critical` 影响时，先升级并回到 `$change-impact-analysis`；最多往返两次。
 
-无论使用任何语言或框架，都必须遵守以下规则：
+companion Skill 缺失时，重建最小影响清单或执行最小验证，标记 `degraded`，不得声称已调用；缺少安全前提或两次循环后仍有关键失败时使用 `Blocked`。
 
-```text
-1. 同一业务数据只能有一个权威来源。
-2. 同一字段只能有一个统一类型定义。
-3. 同一枚举只能有一个统一常量定义。
-4. 页面只能消费数据，不能私自重新定义业务数据。
-5. 接口请求必须统一封装，禁止散落在页面中。
-6. 状态管理必须有明确归属，禁止多个页面各自维护同一份状态。
-7. mock 数据必须与类型定义和真实接口保持一致。
-8. 任何字段、接口、枚举、状态修改前，必须触发 change-impact-analysis。
-9. 任何修改完成后，必须触发 data-consistency-regression-test。
-```
+## 验证与发布
 
-## 项目初始化必须生成的文件
+修改性能、无障碍、测试、打包、更新或发布流程时，读取 [quality-release.md](references/quality-release.md)。至少：
 
-```text
-docs/development-standard.md
-docs/data-source-standard.md
-docs/change-impact-standard.md
-docs/regression-test-checklist.md
-docs/module-map.md
-AGENTS.md
-```
+1. 运行仓库已有的 typecheck、lint、单元/契约测试和打包检查；按风险补 packaged-app E2E。
+2. 验证 main/preload/renderer 失败路径、窗口关闭清理、IPC 超时/取消和日志脱敏。
+3. 对目标 OS 验证键盘、焦点、缩放、高对比度和屏幕阅读器基础路径。
+4. 发布前验证代码签名、公证、更新签名、渠道、灰度、崩溃监控与回滚工件。
 
-## 数据源统一规范
+## 输出契约
 
-每个核心业务对象必须登记：
+结束时报告：执行模式、检测到的关键版本和工具链、风险模式、改动文件、进程/平台影响、命令与人工检查证据、人工验收项和回滚方法。每个测试或检查状态必须且只能使用 `Pass`、`Fail`、`Blocked`、`Not run`、`N/A`；未执行不得记为 `Pass`。review 模式按严重度给出文件与行号证据。
 
-```text
-1. 业务对象名称
-2. 类型定义位置
-3. 接口请求位置
-4. 状态管理位置
-5. 枚举/常量位置
-6. mock 数据位置
-7. 使用页面
-8. 使用组件
-9. 关联功能：筛选、排序、统计、导出、权限、详情、表单
-10. 修改注意事项
-```
+## References
 
-推荐在项目中维护：
-
-```text
-docs/data-source-map.md
-```
-
-## AI Coding 执行规则
-
-AI 在开发过程中必须：
-
-```text
-1. 先确认当前模块归属，再写代码。
-2. 先查是否已有类型、接口、组件、常量，再新增。
-3. 禁止重复创建相似组件、相似数据结构、相似状态枚举。
-4. 新增页面时，必须复用已有 service、store、types、constants、components。
-5. 修改已有功能时，必须先做影响面分析。
-6. 修改完成后，必须输出修改文件、影响范围、自测结果和待人工验收项。
-```
-
-
-## Electron 项目修改前检查
-
-涉及以下内容时，必须先触发 `change-impact-analysis`：
-
-```text
-1. 修改 IPC 通道
-2. 修改 preload API
-3. 修改本地文件结构
-4. 修改数据库字段
-5. 修改窗口行为
-6. 修改自动更新逻辑
-7. 修改主进程服务
-8. 修改渲染层数据展示
-9. 修改权限/安全策略
-10. 修改日志与错误处理
-```
+- [architecture-security.md](references/architecture-security.md)：进程所有权、窄 preload、IPC、窗口和本地能力安全。
+- [quality-release.md](references/quality-release.md)：性能、无障碍、测试、打包、签名、更新和回滚。

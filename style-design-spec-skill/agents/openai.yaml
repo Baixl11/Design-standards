@@ -1,0 +1,4 @@
+interface:
+  display_name: "风格设计规范提取"
+  short_description: "从参考界面提取可追溯的设计规范、设计令牌与验收清单"
+  default_prompt: "使用 $style-design-spec-skill 从给定参考中提取可追溯的设计规范，并按需生成设计令牌或验收清单。"

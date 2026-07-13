@@ -1,181 +1,121 @@
 ---
 name: fastapi-backend-standard
-description: Python FastAPI 后端服务开发规范 Skill。用于约束 FastAPI 项目的目录结构、API 路由、Pydantic Schema、服务层、数据库模型、统一错误处理、日志、测试、数据源一致性和 AI Coding 修改规则。
+description: 为 Python FastAPI 服务提供版本感知的初始化、现有项目修改和代码审查规范，覆盖 Pydantic/API 契约、同步与异步边界、SQLAlchemy/SQLModel、事务迁移、安全、测试、可观测性和发布。用户明确使用 FastAPI 并要求搭建、开发、重构或审查后端时使用；普通 Python 脚本、非 FastAPI 服务或仅做技术选型时不使用。
 ---
 
-# FastAPI 后端开发规范 Skill
+# FastAPI 工程规范
 
-## 适用场景
+先服从项目已安装版本、现有架构和用户约束，再应用本规范。不要为了匹配模板擅自迁移目录、ORM、认证方案或依赖版本。
 
-适用于：
+## 选择模式
 
-- Python FastAPI 后端服务
-- AI 应用后端
-- 数据处理 API
-- Web/App/桌面端配套后端
-- MVP 快速后端服务
+| 模式 | 行为 |
+|---|---|
+| `greenfield` | 基于明确约束选择最小可维护架构，并记录关键决策。 |
+| `existing-project` | 先读取项目和变更范围，沿用既有模式；重构必须有独立理由和授权。 |
+| `review` | 只报告可验证问题、风险和修复顺序，不直接改动。 |
 
-## 推荐技术组合
+## 按需读取
 
-```text
-FastAPI + Python
-数据校验：Pydantic
-ORM：SQLAlchemy / SQLModel
-迁移：Alembic
-数据库：PostgreSQL / MySQL / SQLite
-鉴权：JWT / OAuth2
-测试：pytest + httpx
-代码规范：ruff + black + mypy
-```
+- 涉及运行时、持久化、迁移或契约时读取 [references/runtime-and-data.md](references/runtime-and-data.md)。
+- 涉及鉴权、安全、测试、可观测性或发布时读取 [references/security-and-quality.md](references/security-and-quality.md)。
 
-## 推荐目录结构
+## 第一步：识别真实项目
 
-```text
-app/
-  main.py
-  api/
-    v1/
-      routes/
-      deps.py
-  modules/
-    user/
-      router.py
-      service.py
-      repository.py
-      schemas.py
-      models.py
-      constants.py
-      tests/
-  core/
-    config.py
-    security.py
-    errors.py
-    logging.py
-  db/
-    session.py
-    migrations/
-  tests/
-```
+检查并记录：
 
-## 分层规范
+- Python、FastAPI、Pydantic、ORM、数据库驱动和迁移工具的实际版本。
+- `pyproject.toml`、锁文件、应用入口、配置方式、依赖注入和 lifespan。
+- 路由、业务、数据访问和 schema 的现有边界。
+- 同步或异步数据库驱动、外部客户端、任务队列和阻塞 I/O。
+- OpenAPI 使用方式、客户端生成、测试命令、CI、容器和部署平台。
+- 当前 git 状态、用户未提交修改和已有测试失败。
 
-```text
-1. router 只处理路由、参数、响应，不写复杂业务逻辑。
-2. service 处理业务规则。
-3. repository 处理数据库访问。
-4. schemas 处理请求/响应模型。
-5. models 处理数据库模型。
-6. constants 处理枚举、状态、错误码。
-```
+信息不足但决策可逆时采用最小假设并说明；认证、数据驻留、合规、事务一致性和部署约束不明确时先确认。
 
-## API 规范
+## Greenfield 决策
 
-```text
-1. API 必须有明确请求 schema 和响应 schema。
-2. 禁止直接返回数据库 ORM 对象给前端。
-3. 错误响应必须统一格式。
-4. 分页、筛选、排序参数必须统一。
-5. 修改字段时必须同步 schemas、models、repository、service、测试和前端接口文档。
-```
+不要同时堆叠替代方案。按约束选择并记录：
 
-## 数据模型规范
+| 决策 | 选择条件 |
+|---|---|
+| SQLAlchemy | 复杂查询、成熟映射、精细事务或长期维护项目。 |
+| SQLModel | 模型简单、团队接受其抽象且所需能力已验证的小型服务。 |
+| 同步执行 | 依赖主要为同步 I/O，吞吐需求普通，团队优先简单性。 |
+| 异步执行 | 数据库和外部客户端均为异步，且并发 I/O 是已测量瓶颈。 |
+| 外部 OIDC/OAuth2 提供方 | 企业身份、SSO、MFA、生命周期或合规要求明显。 |
+| 本地认证 | 范围受控且团队能够承担密码、令牌、吊销和审计责任。 |
 
-```text
-1. 数据库模型和 Pydantic schema 必须明确区分。
-2. 每个业务模块维护自己的 models/schemas/constants。
-3. 枚举字段必须统一定义。
-4. 字段默认值、可空、长度、索引必须明确。
-5. 数据库变更必须创建迁移脚本。
-```
+不得在 `async def` 中直接运行阻塞数据库、文件、HTTP 或 CPU 密集工作。不要用“AI 后端”作为选择异步或 FastAPI 的充分理由。
 
-## 错误处理与日志规范
+## 架构规则
 
-```text
-1. 全局异常必须统一处理。
-2. 业务错误必须有错误码。
-3. 日志必须包含 trace_id/request_id。
-4. 敏感信息不得进入日志。
-5. 文件上传、鉴权、权限失败必须记录必要审计信息。
-```
+1. 小型 CRUD 不强制建立无价值的多层转发；复杂业务使用 router/use-case 或 service/repository 等清晰边界。
+2. Router 负责 HTTP 边界、依赖和响应映射，不承载长事务或复杂业务。
+3. Pydantic 模型表达外部契约，ORM 模型表达持久化；通过显式映射控制可见字段。
+4. 不直接向客户端序列化 ORM 实体、内部异常、秘密字段或未经验证的动态对象。
+5. 领域枚举、错误语义和权限标识有明确 Owner；允许不同层存在显式派生表示。
+6. 共享能力通过稳定模块 API 使用，不从其他模块深层导入内部实现。
 
+## API 与数据契约
 
-## 通用强制原则
+- 为请求、响应、分页和错误声明明确 schema，并保持 OpenAPI 与运行行为一致。
+- 对网络输入执行运行时校验；静态类型不能替代边界校验。
+- 变更契约时识别所有消费者、生成客户端、旧版本和兼容窗口。
+- 使用 HTTP 状态、headers 和媒体类型表达协议语义；不要为文件、流或空响应强套统一 envelope。
+- 对创建、支付、任务提交和 webhook 等重试场景设计幂等键与重复处理语义。
 
-无论使用任何语言或框架，都必须遵守以下规则：
+## 数据与迁移
 
-```text
-1. 同一业务数据只能有一个权威来源。
-2. 同一字段只能有一个统一类型定义。
-3. 同一枚举只能有一个统一常量定义。
-4. 页面只能消费数据，不能私自重新定义业务数据。
-5. 接口请求必须统一封装，禁止散落在页面中。
-6. 状态管理必须有明确归属，禁止多个页面各自维护同一份状态。
-7. mock 数据必须与类型定义和真实接口保持一致。
-8. 任何字段、接口、枚举、状态修改前，必须触发 change-impact-analysis。
-9. 任何修改完成后，必须触发 data-consistency-regression-test。
-```
+- 明确 session 生命周期和事务边界；一次业务操作不要隐式跨多个独立提交。
+- 迁移脚本进入版本控制，并在隔离数据库验证升级路径。
+- 不兼容字段变更采用 expand/backfill/switch/contract，说明旧实例和旧客户端兼容期。
+- 明确唯一约束、索引、外键、并发更新和乐观/悲观锁策略。
+- 区分 canonical 数据、派生表、缓存和搜索索引，记录刷新与失效机制。
 
-## 项目初始化必须生成的文件
+## 安全与运行时
 
-```text
-docs/development-standard.md
-docs/data-source-standard.md
-docs/change-impact-standard.md
-docs/regression-test-checklist.md
-docs/module-map.md
-AGENTS.md
-```
+- 在每个受保护 use case 执行授权，不把“已登录”等同于“有权操作该对象”。
+- 根据 cookie 或 bearer token 模式分别处理 CSRF、CORS、SameSite、origin 和令牌存储。
+- 对上传、URL 抓取、模板、反序列化和外部命令设置类型、大小、协议、目标和超时限制。
+- 秘密只从受控配置读取；日志、错误和 trace 不包含密码、token、个人信息或原始请求体。
+- 短小、可丢失的后置工作可使用进程内后台任务；关键、长时或需重试任务使用持久队列。
+- 为外部调用设置连接/读取超时、取消、有限重试和熔断策略；非幂等请求不得自动重试。
 
-## 数据源统一规范
+## 测试与可观测性
 
-每个核心业务对象必须登记：
+- 从项目配置发现命令，先运行受影响模块，再按风险扩大到类型检查、契约、数据库集成和端到端测试。
+- 使用隔离数据库和合成数据；禁止测试连接生产服务或共享生产凭据。
+- 覆盖认证授权、验证错误、事务回滚、迁移、并发、幂等、分页和外部依赖失败。
+- 结构化日志关联 request/trace ID；提供延迟、错误率、吞吐、队列和数据库池指标。
+- 区分 liveness 与 readiness；验证优雅关闭、连接释放和部署回滚。
 
-```text
-1. 业务对象名称
-2. 类型定义位置
-3. 接口请求位置
-4. 状态管理位置
-5. 枚举/常量位置
-6. mock 数据位置
-7. 使用页面
-8. 使用组件
-9. 关联功能：筛选、排序、统计、导出、权限、详情、表单
-10. 修改注意事项
-```
+## 变更安全
 
-推荐在项目中维护：
+选择且只选择命中的最高风险模式：
 
-```text
-docs/data-source-map.md
-```
+- `local`：单一 router、schema mapper 或同一所有权单元内的局部行为。
+- `module`：同一业务模块内跨 router、service、repository 或任务的共享行为。
+- `contract`：API/OpenAPI、schema、任务载荷、事件或外部消费者。
+- `data-migration`：数据库结构/语义、迁移、backfill、保留或删除。
+- `security-critical`：认证授权、租户、支付、秘密、隐私或审计边界。
 
-## AI Coding 执行规则
+按 `security-critical > data-migration > contract > module > local` 升级，不因改动文件少而降级。
 
-AI 在开发过程中必须：
+- `existing-project` 实现模式以及 greenfield 开始写入代码前使用 `$change-impact-analysis` 并传递风险模式；`local` 只需轻量影响清单，纯 greenfield 决策和不计划修改的 review 不调用。
+- 任何模式只要实施了修改，完成后都使用 `$data-consistency-regression-test` 并继承同一风险模式。
+- 验证发现新的 `contract`、`data-migration` 或 `security-critical` 影响时，先升级风险并回到 `$change-impact-analysis`；最多往返两次。
 
-```text
-1. 先确认当前模块归属，再写代码。
-2. 先查是否已有类型、接口、组件、常量，再新增。
-3. 禁止重复创建相似组件、相似数据结构、相似状态枚举。
-4. 新增页面时，必须复用已有 service、store、types、constants、components。
-5. 修改已有功能时，必须先做影响面分析。
-6. 修改完成后，必须输出修改文件、影响范围、自测结果和待人工验收项。
-```
+companion Skill 缺失时，重建最小影响清单或执行最小验证，并标记 `degraded`；不得声称已调用。缺少隔离数据库、安全前提或两次循环后仍有关键失败时使用 `Blocked`。不要因发现邻近技术债扩大当前修改范围。
 
+## 输出契约
 
-## FastAPI 项目修改前检查
+报告执行模式、检测到的 Python/FastAPI/Pydantic/ORM 版本、风险模式、改动文件、API 与数据影响、命令及人工检查证据、人工验收项和回滚方法。每个测试或检查状态必须且只能使用 `Pass`、`Fail`、`Blocked`、`Not run`、`N/A`；未执行不得记为 `Pass`。review 模式按严重度给出文件与行号证据。
 
-涉及以下内容时，必须先触发 `change-impact-analysis`：
+## 完成标准
 
-```text
-1. 修改 API 路由
-2. 修改请求/响应 schema
-3. 修改数据库模型
-4. 修改枚举/状态
-5. 修改鉴权/权限
-6. 修改 service 业务规则
-7. 修改 repository 查询逻辑
-8. 修改错误码
-9. 修改测试用例
-10. 修改前端依赖接口
-```
+- 代码符合已检测版本和现有项目约定。
+- 边界输入、授权、事务、迁移和错误路径均有证据或明确未验证。
+- 未静默改变 API、数据库或任务语义。
+- 测试报告符合输出契约并附实际证据。
+- 发布、兼容、监控和回滚风险与变更等级相匹配。

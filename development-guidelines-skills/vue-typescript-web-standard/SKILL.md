@@ -1,184 +1,83 @@
 ---
 name: vue-typescript-web-standard
-description: Vue + TypeScript Web 应用开发规范 Skill。用于生成和约束 Vue Web 项目的目录结构、组件拆分、Composition API、Pinia 状态管理、接口封装、类型定义、统一数据源和 AI Coding 修改规则。
+description: 约束、实现或审查 Vue 3 + TypeScript 客户端 Web 应用，重点覆盖 Vite SPA、Composition API、Pinia、路由、运行时数据契约、异步竞态、安全、无障碍、测试和发布。用于新建 Vue 3 SPA、修改现有 Vue/Vite 管理后台或业务系统，或审查客户端工程质量；不用于 Nuxt、Vue 2 或其他带专属服务端约定的框架。Electron renderer 可同时采用本 Skill，但桌面进程、IPC 与安全以 Electron Skill 为准。
 ---
 
-# Vue + TypeScript Web 开发规范 Skill
+# Vue TypeScript Web Standard
 
-## 适用场景
+## 选择执行模式
 
-适用于：
+- **greenfield**：为新的 Vue 3 SPA 选择一套最小且一致的工具、目录和质量门。
+- **existing-project**：保留现有 Vue major、router、Pinia/状态、请求、表单、UI 和测试方案，只做必要改动。
+- **review**：不主动编辑，按严重度报告组件、状态、契约和发布风险。
 
-- Vue 3 Web 应用
-- 企业管理后台
-- 数据看板
-- 业务系统
-- Vite + Vue + TypeScript 项目
-- Vue + Element Plus / Arco Design / Naive UI 项目
+## 先检查项目
 
-## 推荐技术组合
+开始前：
 
-```text
-Vue 3 + TypeScript + Vite
-UI：Element Plus / Arco Design / Naive UI
-状态管理：Pinia
-请求层：axios/fetch wrapper
-路由：Vue Router
-表单：组件库 Form + schema 配置
-测试：Vitest + Vue Test Utils + Playwright
-代码规范：ESLint + Prettier
-```
+1. 阅读仓库 `AGENTS.md`、贡献说明、目标 feature 和路由文档。
+2. 检查 `package.json`、锁文件、workspace、Vue/TypeScript/Vite major 和包管理器。
+3. 检查 Vue Router、Pinia/其他状态、server-state、form、runtime schema、UI 和 mock 方案。
+4. 检查 `tsconfig`、Vite、ESLint、format、vue-tsc/typecheck、test、build 和 preview 命令。
+5. 定位当前 feature 的 API、service、composable、query cache、route query、store、SFC 和全局错误处理。
+6. 检查部署、base path、CDN/缓存、CSP、环境变量、监控和 source map 策略。
+7. `existing-project` 模式不得因推荐清单擅自换状态库、路由、请求库、UI 库或目录结构。
 
-## 推荐目录结构
+## Greenfield 决策
 
-```text
-src/
-  app/
-    router.ts
-    plugins.ts
-  pages/
-    dashboard/
-    users/
-  features/
-    user/
-      components/
-      composables/
-      services/
-      stores/
-      types.ts
-      constants.ts
-      mock.ts
-      index.ts
-  shared/
-    components/
-    composables/
-    services/
-    utils/
-    types/
-    constants/
-  assets/
-  styles/
-```
+每类职责只选择一个主方案：
 
-## Vue 组件规范
+| 需求 | 主方案 |
+| --- | --- |
+| 单组件短期 UI | 使用局部 `ref`/`reactive`，避免进入 Pinia |
+| 可分享的筛选、分页和 tab | 使用 Vue Router query，并用 schema 解析默认/非法值 |
+| 远端数据缓存、重试、失效和 mutation | 需求成立时选择 TanStack Query for Vue；简单请求由 route/feature composable 协调 service |
+| 跨页面且不属于远端/URL/表单的数据 | 使用按一致性边界拆分的 Pinia store，而非每模块一个巨型 store |
+| 复杂表单 | 需要跨字段 schema、动态字段和细粒度状态时选择一套表单方案；简单表单使用组件与原生约束 |
+| HTTP transport | 优先项目统一 fetch service；只有拦截、上传进度或兼容需求时选择 axios |
 
-```text
-1. 页面级组件放 pages。
-2. 业务组件放 features/{module}/components。
-3. 通用组件放 shared/components。
-4. 单文件组件必须保持职责清晰，避免 template、script、style 过度膨胀。
-5. 复杂业务逻辑必须抽到 composables 或 services。
-6. 表格列、表单 schema、筛选条件需要统一配置，避免多个页面重复定义。
-```
+UI 体系按现有设计系统和团队维护能力选择一个主体系。不要为同一职责混用多个状态、表单或请求库。
 
-## Composition API 规范
+## 组件、状态与数据工作流
 
-```text
-1. 业务 composable 命名为 useXxx。
-2. composables 必须放在对应 feature 下，通用能力放 shared/composables。
-3. 不允许多个页面重复实现同一数据转换逻辑。
-4. 涉及字段和枚举的转换必须引用 constants/types。
-```
+涉及 SFC、composable、store、请求、表单、schema、异步或错误处理时，读取 [architecture-data.md](references/architecture-data.md)。核心要求：
 
-## Pinia 状态管理规范
+1. 分开管理局部 UI、route query、表单、远端缓存和全局客户端状态，记录唯一写入所有者。
+2. route/feature composable 可以协调 service/query；展示组件通过 typed props/emits/slots 工作，不散落裸 HTTP。
+3. 网络、storage、route 和用户输入在边界做 runtime schema 验证，再映射领域/view model。
+4. Pinia 按一致性和生命周期拆 store；组件读取响应式 state 时使用 `storeToRefs` 或保持属性访问，避免错误解构。
+5. composable 明确 effect、watch、订阅、timer 和请求的启动/停止；快速导航和筛选防止旧响应覆盖新状态。
+6. 使用组件级捕获、全局 handler 和路由错误 UI 分层处理异常，并给用户可执行恢复动作。
 
-```text
-1. 每个业务模块最多一个核心 Pinia store。
-2. Store 放在 features/{module}/stores。
-3. Store 只管理跨页面共享状态，不替代 service 层。
-4. 页面临时 UI 状态可以本地维护，但业务状态必须统一。
-5. 修改 store 字段时必须全局搜索引用。
-```
+## 风险模式与 Companion Skills
 
-## 接口与类型规范
+选择且只选择最高风险模式：
 
-```text
-features/user/types.ts        定义 User、UserQuery、UserDetail 等类型
-features/user/constants.ts    定义 USER_STATUS、USER_ROLE 等枚举和映射
-features/user/services/       定义接口请求
-features/user/mock.ts         定义 mock 数据
-```
+- `local`：单个 SFC、纯 composable/helper 或同一状态所有权单元内的局部行为。
+- `module`：同一 feature 内跨组件、route、query、Pinia store、form 或共享表格/筛选行为。
+- `contract`：API/runtime schema、公开 props/emits、route params/query、postMessage 或外部消费者。
+- `data-migration`：Pinia/browser 持久化 schema/语义、缓存迁移、backfill、保留或删除。
+- `security-critical`：认证授权、令牌/Cookie/CSRF、支付、个人数据、构建机密和审计边界。
 
-页面不得直接发请求，必须通过 service/composable 调用。
+`existing-project` 实现模式以及 greenfield 开始写入代码前使用 `$change-impact-analysis` 并传递风险模式；纯 greenfield 决策和不计划修改的 review 不调用。任何模式只要实施了修改，完成后都使用 `$data-consistency-regression-test` 并继承同一模式。验证发现新的 `contract`、`data-migration` 或 `security-critical` 影响时，先升级并回到 `$change-impact-analysis`；最多往返两次。
 
+companion Skill 缺失时，重建最小影响清单或执行最小验证，标记 `degraded`，不得声称已调用；缺少安全前提或两次循环后仍有关键失败时使用 `Blocked`。
 
-## 通用强制原则
+## 质量与发布
 
-无论使用任何语言或框架，都必须遵守以下规则：
+涉及安全、性能、无障碍、测试或发布时读取 [quality-release.md](references/quality-release.md)。至少：
 
-```text
-1. 同一业务数据只能有一个权威来源。
-2. 同一字段只能有一个统一类型定义。
-3. 同一枚举只能有一个统一常量定义。
-4. 页面只能消费数据，不能私自重新定义业务数据。
-5. 接口请求必须统一封装，禁止散落在页面中。
-6. 状态管理必须有明确归属，禁止多个页面各自维护同一份状态。
-7. mock 数据必须与类型定义和真实接口保持一致。
-8. 任何字段、接口、枚举、状态修改前，必须触发 change-impact-analysis。
-9. 任何修改完成后，必须触发 data-consistency-regression-test。
-```
+1. 使用仓库命令运行 vue-tsc/typecheck、lint、unit/component 测试和 production build。
+2. 验证 loading/empty/error/success、路由失败、取消/重试和关键 mutation 回滚。
+3. 验证语义、键盘、焦点、表单错误、缩放、对比度、RTL 和 reduced motion。
+4. 以数据验证路由拆包、bundle budget、Core Web Vitals、长列表和第三方组件影响。
+5. 发布前验证环境变量、CSP/headers、source map、监控、缓存失效、灰度和回滚 artifact。
 
-## 项目初始化必须生成的文件
+## 输出契约
 
-```text
-docs/development-standard.md
-docs/data-source-standard.md
-docs/change-impact-standard.md
-docs/regression-test-checklist.md
-docs/module-map.md
-AGENTS.md
-```
+报告模式、Vue/TypeScript/Vite 与关键库版本、状态所有权、风险模式、改动文件、命令与人工检查证据、人工验收和回滚步骤。每个测试或检查状态必须且只能使用 `Pass`、`Fail`、`Blocked`、`Not run`、`N/A`；未执行浏览器/流程不得记为 `Pass`。review 模式给出文件与行号证据。
 
-## 数据源统一规范
+## References
 
-每个核心业务对象必须登记：
-
-```text
-1. 业务对象名称
-2. 类型定义位置
-3. 接口请求位置
-4. 状态管理位置
-5. 枚举/常量位置
-6. mock 数据位置
-7. 使用页面
-8. 使用组件
-9. 关联功能：筛选、排序、统计、导出、权限、详情、表单
-10. 修改注意事项
-```
-
-推荐在项目中维护：
-
-```text
-docs/data-source-map.md
-```
-
-## AI Coding 执行规则
-
-AI 在开发过程中必须：
-
-```text
-1. 先确认当前模块归属，再写代码。
-2. 先查是否已有类型、接口、组件、常量，再新增。
-3. 禁止重复创建相似组件、相似数据结构、相似状态枚举。
-4. 新增页面时，必须复用已有 service、store、types、constants、components。
-5. 修改已有功能时，必须先做影响面分析。
-6. 修改完成后，必须输出修改文件、影响范围、自测结果和待人工验收项。
-```
-
-
-## Vue 项目修改前检查
-
-涉及以下内容时，必须先触发 `change-impact-analysis`：
-
-```text
-1. 修改 props / emits
-2. 修改表格列配置
-3. 修改表单 schema
-4. 修改筛选条件
-5. 修改详情字段
-6. 修改 Pinia store 字段
-7. 修改 service 接口
-8. 修改 mock 数据
-9. 修改路由参数
-10. 修改权限逻辑
-```
+- [architecture-data.md](references/architecture-data.md)：SFC/composable、五类状态、Pinia、runtime schema、竞态和错误。
+- [quality-release.md](references/quality-release.md)：Web 安全、无障碍、性能、测试、CI、发布和回滚。
