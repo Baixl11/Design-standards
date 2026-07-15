@@ -1,0 +1,1647 @@
+{
+  "$description": "扁平化设计的跨平台起始 tokens；全部精确值均为 adapted，不代表品牌内部 token。",
+  "$extensions": {
+    "style-design-spec": {
+      "formatVersion": "DTCG-compatible-2026-07",
+      "generatedAt": "2026-07-14T10:19:53+08:00",
+      "targets": [
+        "Web",
+        "移动端参考"
+      ],
+      "documentStatus": "draft"
+    }
+  },
+  "primitive": {
+    "$description": "不带用途的原始值。",
+    "color": {
+      "$description": "起始颜色。",
+      "canvas": {
+        "$type": "color",
+        "$value": "#F6F7F9",
+        "$description": "扁平化设计起始颜色：canvas。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "扁平化设计起始颜色：surface。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "surfaceAlt": {
+        "$type": "color",
+        "$value": "#EAF0F8",
+        "$description": "扁平化设计起始颜色：surfaceAlt。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "textPrimary": {
+        "$type": "color",
+        "$value": "#111827",
+        "$description": "扁平化设计起始颜色：textPrimary。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "textSecondary": {
+        "$type": "color",
+        "$value": "#4B5563",
+        "$description": "扁平化设计起始颜色：textSecondary。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#6B7280",
+        "$description": "扁平化设计起始颜色：border。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "#1D4ED8",
+        "$description": "扁平化设计起始颜色：primary。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "onPrimary": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "扁平化设计起始颜色：onPrimary。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "#0B57D0",
+        "$description": "扁平化设计起始颜色：focus。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "#137333",
+        "$description": "扁平化设计起始颜色：success。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#9A6700",
+        "$description": "扁平化设计起始颜色：warning。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "#B42318",
+        "$description": "扁平化设计起始颜色：danger。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "space": {
+      "$description": "4px 基准间距。",
+      "1": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "最小间距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "2": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "紧凑元素间距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "3": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "小型组件内距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "4": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "默认组件间距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "6": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "分组与卡片内距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "8": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "模块间距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "12": {
+        "$type": "dimension",
+        "$value": "48px",
+        "$description": "页面区段间距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "16": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$description": "大区段间距。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "radius": {
+      "$description": "形状半径。",
+      "control": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "控件圆角。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "container": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "容器圆角。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "full": {
+        "$type": "dimension",
+        "$value": "999px",
+        "$description": "胶囊与圆形的实现半径。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "stroke": {
+      "$description": "边界与焦点描边。",
+      "thin": {
+        "$type": "dimension",
+        "$value": "1px",
+        "$description": "默认边界宽度。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "focus": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "可见键盘焦点宽度。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "size": {
+      "$description": "交互目标尺寸。",
+      "targetMin": {
+        "$type": "dimension",
+        "$value": "44px",
+        "$description": "项目采用的舒适交互目标；高于 WCAG 2.2 AA 的 24px 基线时属于主动适配。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "type": {
+      "$description": "排版起始值。",
+      "fontFamily": {
+        "$type": "fontFamily",
+        "$value": [
+          "Inter",
+          "Noto Sans SC",
+          "system-ui",
+          "sans-serif"
+        ],
+        "$description": "默认界面字体栈。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "fontSize": {
+        "$description": "常用字号。",
+        "small": {
+          "$type": "dimension",
+          "$value": "14px",
+          "$description": "辅助文字字号。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "body": {
+          "$type": "dimension",
+          "$value": "16px",
+          "$description": "正文与常规控件字号。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "title": {
+          "$type": "dimension",
+          "$value": "24px",
+          "$description": "模块标题字号。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "display": {
+          "$type": "dimension",
+          "$value": "40px",
+          "$description": "关键展示标题字号。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        }
+      },
+      "lineHeight": {
+        "$description": "常用行高。",
+        "small": {
+          "$type": "dimension",
+          "$value": "20px",
+          "$description": "辅助文字行高。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "body": {
+          "$type": "dimension",
+          "$value": "24px",
+          "$description": "正文行高。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "title": {
+          "$type": "dimension",
+          "$value": "32px",
+          "$description": "模块标题行高。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "display": {
+          "$type": "dimension",
+          "$value": "48px",
+          "$description": "展示标题行高。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        }
+      }
+    },
+    "motion": {
+      "$description": "状态与层级动效。",
+      "fast": {
+        "$type": "duration",
+        "$value": "110ms",
+        "$description": "按压和即时状态时长。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "standard": {
+        "$type": "duration",
+        "$value": "150ms",
+        "$description": "常规状态转换时长。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": "240ms",
+        "$description": "面板或强调转换时长。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "easing": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.2,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "$description": "默认缓动曲线。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "effect": {
+      "$description": "跨平台效果串；消费端需映射为本地阴影或材质。",
+      "shadowRest": {
+        "$type": "string",
+        "$value": "none",
+        "$description": "静止表面的阴影表达。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "shadowRaised": {
+        "$type": "string",
+        "$value": "0 1px 2px rgb(0 0 0 / 8%)",
+        "$description": "抬升表面的阴影表达。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    }
+  },
+  "semantic": {
+    "$description": "按用途命名的别名。",
+    "color": {
+      "$description": "颜色角色。",
+      "background": {
+        "$type": "color",
+        "$value": "{primitive.color.canvas}",
+        "$description": "页面背景。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.color.surface}",
+        "$description": "默认内容表面。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "surfaceAlt": {
+        "$type": "color",
+        "$value": "{primitive.color.surfaceAlt}",
+        "$description": "次级表面。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "textPrimary": {
+        "$type": "color",
+        "$value": "{primitive.color.textPrimary}",
+        "$description": "主要文本。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "textSecondary": {
+        "$type": "color",
+        "$value": "{primitive.color.textSecondary}",
+        "$description": "次级文本。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.color.border}",
+        "$description": "必要边界。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "action": {
+        "$type": "color",
+        "$value": "{primitive.color.primary}",
+        "$description": "主要操作。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "onAction": {
+        "$type": "color",
+        "$value": "{primitive.color.onPrimary}",
+        "$description": "主要操作上的内容。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{primitive.color.focus}",
+        "$description": "键盘焦点。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{primitive.color.success}",
+        "$description": "成功反馈。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{primitive.color.warning}",
+        "$description": "警告反馈。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{primitive.color.danger}",
+        "$description": "错误与危险操作。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "shape": {
+      "$description": "语义形状。",
+      "control": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.control}",
+        "$description": "交互控件形状。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "container": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.container}",
+        "$description": "内容容器形状。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "motion": {
+      "$description": "语义时长。",
+      "state": {
+        "$type": "duration",
+        "$value": "{primitive.motion.standard}",
+        "$description": "常规状态反馈。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "layer": {
+        "$type": "duration",
+        "$value": "{primitive.motion.slow}",
+        "$description": "浮层与结构变化。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    }
+  },
+  "component": {
+    "$description": "代表性组件契约。",
+    "button": {
+      "$description": "主要按钮。",
+      "primary": {
+        "$description": "高强调按钮。",
+        "background": {
+          "$description": "按钮背景状态。",
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.action}",
+            "$description": "默认背景。",
+            "$extensions": {
+              "style-design-spec": {
+                "status": "adapted",
+                "evidenceIds": [
+                  "E-001",
+                  "E-002",
+                  "E-090"
+                ],
+                "confidence": "medium",
+                "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+                "scope": {
+                  "target": "扁平化设计",
+                  "platform": "Web 与移动端参考",
+                  "theme": "默认起始主题"
+                },
+                "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+              }
+            }
+          }
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.onAction}",
+          "$description": "按钮文字与图标。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "radius": {
+          "$type": "dimension",
+          "$value": "{semantic.shape.control}",
+          "$description": "按钮圆角。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        },
+        "minHeight": {
+          "$type": "dimension",
+          "$value": "{primitive.size.targetMin}",
+          "$description": "按钮最小高度。",
+          "$extensions": {
+            "style-design-spec": {
+              "status": "adapted",
+              "evidenceIds": [
+                "E-001",
+                "E-002",
+                "E-090"
+              ],
+              "confidence": "medium",
+              "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+              "scope": {
+                "target": "扁平化设计",
+                "platform": "Web 与移动端参考",
+                "theme": "默认起始主题"
+              },
+              "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+            }
+          }
+        }
+      }
+    },
+    "input": {
+      "$description": "文本输入。",
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.surface}",
+        "$description": "输入框背景。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{semantic.color.border}",
+        "$description": "默认可见边界。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{semantic.color.focus}",
+        "$description": "聚焦边界。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{semantic.shape.control}",
+        "$description": "输入框圆角。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    },
+    "card": {
+      "$description": "内容卡片。",
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.surface}",
+        "$description": "卡片背景。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{semantic.shape.container}",
+        "$description": "卡片圆角。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      },
+      "shadow": {
+        "$type": "string",
+        "$value": "{primitive.effect.shadowRest}",
+        "$description": "卡片静止效果。",
+        "$extensions": {
+          "style-design-spec": {
+            "status": "adapted",
+            "evidenceIds": [
+              "E-001",
+              "E-002",
+              "E-090"
+            ],
+            "confidence": "medium",
+            "confidenceReason": "该值是面向独立项目的可执行起始值，已做内部一致性审查，但尚未在具体产品实现中测量或进行用户验证。",
+            "scope": {
+              "target": "扁平化设计",
+              "platform": "Web 与移动端参考",
+              "theme": "默认起始主题"
+            },
+            "rationale": "以 Flat 2.0 保留二维、低装饰语言，同时为可发现性、对比度和跨输入模态主动补充边界、焦点与状态反馈。"
+          }
+        }
+      }
+    }
+  }
+}
